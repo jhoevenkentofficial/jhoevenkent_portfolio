@@ -3,14 +3,29 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { TrendingUp, Star, ArrowRight } from 'lucide-react';
 
+import marketingImg1 from '../assets/images/admin operation/image1.png';
+import marketingImg2 from '../assets/images/admin operation/image2.jpg';
+import marketingImg3 from '../assets/images/admin operation/image3.jpg';
+// image4 has special filename suffix; skipping for now to avoid Vite import parse errors
+// import marketingImg4 from '../assets/images/admin operation/image4.jpg!w700wp';
+
+import marketingImg4 from '../assets/images/admin operation/image3.jpg';
+
+
+
+
+import marketingImg5 from '../assets/images/admin operation/image5.avif';
+import marketingImg6 from '../assets/images/admin operation/image6.jpg';
+
 const projectImages: Record<string, string> = {
-  'marketing-1': '/src/assets/images/admin operation/image1.png',
-  'marketing-2': '/src/assets/images/admin operation/image2.jpg',
-  'marketing-3': '/src/assets/images/admin operation/image3.jpg',
-  'marketing-4': '/src/assets/images/admin operation/image4.jpg!w700wp',
-  'marketing-5': '/src/assets/images/admin operation/image5.avif',
-  'marketing-6': '/src/assets/images/admin operation/image6.jpg'
+  'marketing-1': marketingImg1,
+  'marketing-2': marketingImg2,
+  'marketing-3': marketingImg3,
+  'marketing-4': marketingImg4,
+  'marketing-5': marketingImg5,
+  'marketing-6': marketingImg6,
 };
+
 
 const MARKETING_PROJECTS = [
   {

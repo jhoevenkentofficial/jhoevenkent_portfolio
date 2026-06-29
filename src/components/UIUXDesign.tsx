@@ -4,9 +4,12 @@ import { ExternalLink, Github, Eye, X, Palette, ArrowRight } from 'lucide-react'
 import { ALVEE_PROJECTS } from '../data';
 import { Project } from '../types';
 
+import marketingImagePng from '../assets/images/image.png';
+
 const projectImages: Record<string, string> = {
-  'project-4': '/src/assets/images/image.png'
+  'project-4': marketingImagePng,
 };
+
 
 const UI_PROJECTS = ALVEE_PROJECTS.filter(p => p.category === 'UI/UX Design' || p.tags.some(t => t.toLowerCase().includes('ui') || t.toLowerCase().includes('ux') || t.toLowerCase().includes('design') || t.toLowerCase().includes('branding')));
 
