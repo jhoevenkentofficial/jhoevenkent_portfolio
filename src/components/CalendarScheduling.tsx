@@ -3,14 +3,22 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ExternalLink, Github, ChevronLeft, ChevronRight, Eye, X, Calendar, Clock, ArrowRight, Star } from 'lucide-react';
 import { Project } from '../types';
 
+import calP1Img from '../assets/images/calendar sched/p1.png';
+import calP2Img from '../assets/images/calendar sched/p2.png';
+import calP3Img from '../assets/images/calendar sched/p3.png';
+import calP4Img from '../assets/images/calendar sched/p4.png';
+import calP5Img from '../assets/images/calendar sched/p5.png';
+import calP6Img from '../assets/images/calendar sched/p6.png';
+
 const projectImages: Record<string, string> = {
-  'cal-1': '/src/assets/images/calendar sched/p1.png',
-  'cal-2': '/src/assets/images/calendar sched/p2.png',
-  'cal-3': '/src/assets/images/calendar sched/p3.png',
-  'cal-4': '/src/assets/images/calendar sched/p4.png',
-  'cal-5': '/src/assets/images/calendar sched/p5.png',
-  'cal-6': '/src/assets/images/calendar sched/p6.png'
+  'cal-1': calP1Img,
+  'cal-2': calP2Img,
+  'cal-3': calP3Img,
+  'cal-4': calP4Img,
+  'cal-5': calP5Img,
+  'cal-6': calP6Img
 };
+
 
 const CALENDAR_PROJECTS: Project[] = [
   {
