@@ -1,15 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+
 import { ExternalLink, Github, ChevronLeft, ChevronRight, Eye, X, Cpu, Zap, ArrowRight, Star } from 'lucide-react';
 import { Project } from '../types';
 
+import aiCustomerSupportChatbotImg from '../assets/images/ai automation/AI Customer Support Chatbot.png';
+import aiEmailAssistantImg from '../assets/images/ai automation/AI Email Assistant.png';
+import aiLeadQualificationSystemImg from '../assets/images/ai automation/AI Lead Qualification System.png';
+import aiResumeAnalyzerImg from '../assets/images/ai automation/AI Resume Analyzer.png';
+import aiSocialMediaAutomationImg from '../assets/images/ai automation/AI Social Media Automation.png';
+
 const projectImages: Record<string, string> = {
-  'ai-1': '/src/assets/images/ai automation/AI Customer Support Chatbot.png',
-  'ai-2': '/src/assets/images/ai automation/AI Email Assistant.png',
-  'ai-3': '/src/assets/images/ai automation/AI Lead Qualification System.png',
-  'ai-4': '/src/assets/images/ai automation/AI Resume Analyzer.png',
-  'ai-5': '/src/assets/images/ai automation/AI Social Media Automation.png'
+  'ai-1': aiCustomerSupportChatbotImg,
+  'ai-2': aiEmailAssistantImg,
+  'ai-3': aiLeadQualificationSystemImg,
+  'ai-4': aiResumeAnalyzerImg,
+  'ai-5': aiSocialMediaAutomationImg,
 };
+
 
 const AI_PROJECTS: Project[] = [
   {
