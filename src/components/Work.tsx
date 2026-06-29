@@ -4,12 +4,18 @@ import { ExternalLink, Github, ChevronLeft, ChevronRight, Quote, ArrowRight, Sta
 import { ALVEE_PROJECTS } from '../data';
 import { Project } from '../types';
 
+import siargaohirehubImg from '../assets/images/Siargaohirehub.png';
+import kuyapasabuyImg from '../assets/images/kuyapasabuy.png';
+import traveltewnewsImg from '../assets/images/traveltewnews.png';
+import yourgiftnetworkImg from '../assets/images/yourgiftnetwork.png';
+
 const projectImages: Record<string, string> = {
-  'project-1': '/src/assets/images/Siargaohirehub.png',
-  'project-2': '/src/assets/images/kuyapasabuy.png',
-  'project-3': '/src/assets/images/traveltewnews.png',
-  'project-5': '/src/assets/images/yourgiftnetwork.png'
+  'project-1': siargaohirehubImg,
+  'project-2': kuyapasabuyImg,
+  'project-3': traveltewnewsImg,
+  'project-5': yourgiftnetworkImg,
 };
+
 
 const WEB_PROJECTS = ALVEE_PROJECTS.filter(p => p.category === 'Web Development');
 
