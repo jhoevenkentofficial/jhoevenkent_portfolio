@@ -157,7 +157,7 @@ export const ALVEE_PROJECTS: Project[] = [
     description: 'A central web and mobile job application platform bridging local talent with expanding businesses in the Siargao Island tourism and hospitality ecosystems.',
     tags: ['Node.js', 'Python', 'REST APIs', 'MySQL', 'Postgres'],
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80',
-    demoUrl: '#',
+    demoUrl: 'https://siargaohirehubnetworking.onrender.com/',
     githubUrl: '#',
     featured: true
   },
@@ -168,7 +168,7 @@ export const ALVEE_PROJECTS: Project[] = [
     description: 'A localized delivery platform specialized for streamlined order procurement and routing fulfillment inside the regional ecosystems of Siargao.',
     tags: ['React', 'Database Logic', 'Delivery Routing', 'Local Deployment'],
     image: 'https://images.unsplash.com/photo-1526367790999-015078648c7e?auto=format&fit=crop&w=800&q=80',
-    demoUrl: '#',
+    demoUrl: 'https://www.kuyapasabuysiargao.com/',
     githubUrl: '#',
     featured: true
   },
@@ -179,7 +179,7 @@ export const ALVEE_PROJECTS: Project[] = [
     description: 'A comprehensive full-site data-driven news aggregator platform dedicated to scraping, centralizing, and dispatching multi-channel travel news feeds.',
     tags: ['Data Scraping', 'News Aggregator', 'Routing Layouts', 'Cloud Production'],
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80',
-    demoUrl: '#',
+    demoUrl: 'https://traveltewnews.com/',
     githubUrl: '#',
     featured: true
   },
@@ -201,7 +201,7 @@ export const ALVEE_PROJECTS: Project[] = [
     description: 'A dynamic social media platform enabling users to connect, share content, and build communities with real-time feeds, messaging, and engagement tools.',
     tags: ['React', 'Social Features', 'Real-time Feed', 'User Authentication', 'Responsive UI'],
     image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80',
-    demoUrl: '#',
+    demoUrl: 'https://yourgiftnetwork.app/',
     githubUrl: '#',
     featured: true
   }

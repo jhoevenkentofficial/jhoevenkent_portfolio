@@ -123,7 +123,7 @@ export default function Work() {
                     <a href={featured.demoUrl} target="_blank" rel="noopener noreferrer"
                       className="px-6 py-3.5 border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-sm rounded-xl transition-all duration-300 flex items-center gap-2">
                       <ExternalLink className="w-4 h-4" />
-                      Live Demo
+                      View Site
                     </a>
                   )}
                 </div>
@@ -345,7 +345,7 @@ export default function Work() {
                       <a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer"
                         className="px-6 py-3 bg-brand-orange hover:bg-[#E05E12] text-white font-semibold text-sm rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all">
                         <ExternalLink className="w-4 h-4" />
-                        Launch Live Project
+                        View Site
                       </a>
                     )}
                     {selectedProject.githubUrl && selectedProject.githubUrl !== '#' && (

@@ -26,5 +26,6 @@
     "noImplicitAny": false,
     "types": ["react", "react-dom", "node"],
     "typeRoots": ["./node_modules/@types"]
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }
