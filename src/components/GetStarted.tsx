@@ -81,7 +81,8 @@ export default function GetStarted() {
       submitData.append('company', formData.company);
       submitData.append('projectType', formData.projectType);
       submitData.append('budget', formData.budget);
-      submitData.append('timeline', formData.timeline);
+      submitData.append('Appointment Date', selectedDate || 'Not selected');
+      submitData.append('Appointment Time', selectedTime || 'Not selected');
       submitData.append('goals', formData.goals);
       submitData.append('message', formData.message);
 
