@@ -69,10 +69,28 @@ export default function GetStarted() {
     setSubmitSuccess(false);
 
     try {
-      const res = await fetch('/api/briefs', {
+      // Send form data directly to email via Web3Forms
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
+          subject: `New Project Brief - ${formData.firstName} ${formData.lastName}`,
+          from_name: 'KentDev Portfolio - Project Brief',
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          projectType: formData.projectType,
+          budget: formData.budget,
+          timeline: formData.timeline,
+          goals: formData.goals,
+          message: formData.message
+        })
       });
 
       const data = await res.json();
@@ -96,7 +114,7 @@ export default function GetStarted() {
         // Auto-dismiss success message after 7 seconds
         setTimeout(() => setSubmitSuccess(false), 7000);
       } else {
-        setSubmitError(data.error || 'Something went wrong. Please try again.');
+        setSubmitError(data.message || 'Something went wrong. Please try again.');
       }
     } catch (err) {
       setSubmitError('Network error. Please try again later.');
