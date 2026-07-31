@@ -177,13 +177,6 @@ export default function AIAutomation() {
                     View Project Details
                     <Eye className="w-4 h-4" />
                   </button>
-                  {featured.demoUrl && featured.demoUrl !== '#' && (
-                    <a href={featured.demoUrl} target="_blank" rel="noopener noreferrer"
-                      className="px-6 py-3.5 border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-sm rounded-xl transition-all duration-300 flex items-center gap-2">
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                  )}
                 </div>
               </motion.div>
             </div>
@@ -396,20 +389,7 @@ export default function AIAutomation() {
                   </div>
 
                   <div className="flex flex-wrap gap-4 pt-6 mt-6 border-t border-slate-100">
-                    {selectedProject.demoUrl && (
-                      <a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer"
-                        className="px-6 py-3 bg-brand-orange hover:bg-[#E05E12] text-white font-semibold text-sm rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all">
-                        <ExternalLink className="w-4 h-4" />
-                        Launch Live Project
-                      </a>
-                    )}
-                    {selectedProject.githubUrl && selectedProject.githubUrl !== '#' && (
-                      <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer"
-                        className="px-6 py-3 border border-slate-300 text-brand-navy hover:bg-slate-50 font-semibold text-sm rounded-xl flex items-center gap-2 transition-all">
-                        <Github className="w-4 h-4" />
-                        View Source Code
-                      </a>
-                    )}
+                    {/* No external links - just project details */}
                   </div>
                 </div>
               </div>
