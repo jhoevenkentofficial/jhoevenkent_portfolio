@@ -69,28 +69,28 @@ export default function GetStarted() {
     setSubmitSuccess(false);
 
     try {
-      // Send form data directly to email via Web3Forms
+      // Send form data directly to email via Web3Forms using FormData (recommended approach)
+      const submitData = new FormData();
+      submitData.append('access_key', 'b7d1e00b-a06e-4ee4-bde5-3b530d15594b');
+      submitData.append('subject', `New Project Brief - ${formData.firstName} ${formData.lastName}`);
+      submitData.append('from_name', 'KentDev Portfolio - Project Brief');
+      submitData.append('firstName', formData.firstName);
+      submitData.append('lastName', formData.lastName);
+      submitData.append('email', formData.email);
+      submitData.append('phone', formData.phone);
+      submitData.append('company', formData.company);
+      submitData.append('projectType', formData.projectType);
+      submitData.append('budget', formData.budget);
+      submitData.append('timeline', formData.timeline);
+      submitData.append('goals', formData.goals);
+      submitData.append('message', formData.message);
+
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          access_key: 'b7d1e00b-a06e-4ee4-bde5-3b530d15594b',
-          subject: `New Project Brief - ${formData.firstName} ${formData.lastName}`,
-          from_name: 'KentDev Portfolio - Project Brief',
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          projectType: formData.projectType,
-          budget: formData.budget,
-          timeline: formData.timeline,
-          goals: formData.goals,
-          message: formData.message
-        })
+        body: submitData
       });
 
       const data = await res.json();
@@ -117,7 +117,8 @@ export default function GetStarted() {
         setSubmitError(data.message || 'Something went wrong. Please try again.');
       }
     } catch (err) {
-      setSubmitError('Network error. Please try again later.');
+      console.error('Form submission error:', err);
+      setSubmitError(err instanceof Error ? err.message : 'Network error. Please check your connection and try again.');
     } finally {
       setSubmitting(false);
     }
