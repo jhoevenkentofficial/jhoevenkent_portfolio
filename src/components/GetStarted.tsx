@@ -77,7 +77,7 @@ export default function GetStarted() {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
+          access_key: 'b7d1e00b-a06e-4ee4-bde5-3b530d15594b',
           subject: `New Project Brief - ${formData.firstName} ${formData.lastName}`,
           from_name: 'KentDev Portfolio - Project Brief',
           firstName: formData.firstName,
