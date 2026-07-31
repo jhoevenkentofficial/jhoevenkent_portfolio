@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, Download } from 'lucide-react';
 import heroImage from '../assets/images/image.png';
@@ -9,6 +10,7 @@ interface HeroProps {
 
 export default function Hero({ setActiveSection }: HeroProps) {
   const [scrollY, setScrollY] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +21,7 @@ export default function Hero({ setActiveSection }: HeroProps) {
   }, []);
 
   const handleGetStartedClick = () => {
-    window.location.href = '/get-started';
+    navigate('/get-started');
   };
 
   // Open CV PDF in new tab

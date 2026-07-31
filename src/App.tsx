@@ -1,5 +1,5 @@
 import { useState, useEffect, ComponentType } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import WorkHeader from './components/WorkHeader';
 import Hero from './components/Hero';
@@ -17,6 +17,7 @@ import { ArrowRight } from 'lucide-react';
 
 function HomePage() {
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
 
   // Track active section on scroll
   useEffect(() => {
@@ -68,7 +69,7 @@ function HomePage() {
               Let's collaborate and build something amazing together. Get a free consultation and custom roadmap for your business.
             </p>
             <button
-              onClick={() => window.location.href = '/get-started'}
+              onClick={() => navigate('/get-started')}
               className="px-10 py-4 bg-brand-orange hover:bg-[#E05E12] text-white font-sans font-bold text-base rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
             >
               Get Started Now
