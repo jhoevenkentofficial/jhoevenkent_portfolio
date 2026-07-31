@@ -13,6 +13,7 @@ import Work from './components/Work';
 import AIAutomation from './components/AIAutomation';
 import CalendarScheduling from './components/CalendarScheduling';
 import AdminOperations from './components/AdminOperations';
+import MobileDevelopment from './components/MobileDevelopment';
 import { ArrowRight } from 'lucide-react';
 
 function HomePage() {
@@ -178,6 +179,7 @@ export default function App() {
         <Route path="/ai-automation" element={<ServicePage Component={AIAutomation} />} />
         <Route path="/calendar-scheduling" element={<ServicePage Component={CalendarScheduling} />} />
         <Route path="/admin-operations" element={<ServicePage Component={AdminOperations} />} />
+        <Route path="/mobile-development" element={<ServicePage Component={MobileDevelopment} />} />
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

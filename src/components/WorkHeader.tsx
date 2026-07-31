@@ -12,7 +12,8 @@ export default function WorkHeader({ activeSection }: WorkHeaderProps) {
     { id: 'home', label: 'Home' },
     { id: 'ai-automation', label: 'AI Automation' },
     { id: 'calendar-scheduling', label: 'Calendar Scheduling' },
-    { id: 'web-development', label: 'Web Development' },
+    { id: 'web-development', label: 'Web Development/Systems' },
+    { id: 'mobile-development', label: 'Mobile Development' },
     { id: 'marketing', label: 'Marketing' }
   ];
 
@@ -21,6 +22,8 @@ export default function WorkHeader({ activeSection }: WorkHeaderProps) {
       navigate('/');
     } else if (id === 'web-development') {
       navigate('/work');
+    } else if (id === 'mobile-development') {
+      navigate('/mobile-development');
     } else if (id === 'marketing') {
       navigate('/admin-operations');
     } else {
