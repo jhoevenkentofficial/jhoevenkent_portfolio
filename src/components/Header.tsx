@@ -236,6 +236,17 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
                   {item.label}
                 </button>
               ))}
+              <button
+                onClick={() => {
+                  handleNavClick('getstarted', '/get-started');
+                }}
+                className="w-full py-3 bg-brand-orange hover:bg-[#E05E12] text-white font-sans font-semibold text-sm rounded-xl shadow-md transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 px-2"
+              >
+                Get Started
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </button>
               <div className="flex items-center space-x-4 pt-2 px-2">
                 <a 
                   href="https://www.facebook.com/kent.escobal.12" 
