@@ -36,12 +36,12 @@ function getGeminiClient(): GoogleGenAI | null {
 
 // Jhoeven Kent Knowledge Base for AI Companion
 const ALVEE_SYSTEM_INSTRUCTION = `
-You are the AI Companion and Assistant of Jhoeven Kent Escobal, a professional Full Stack Developer & Digital Operations Specialist.
+You are the AI Companion and Assistant of Jhoeven Kent Escobal, a professional Full Stack Web Developer.
 Your purpose is to answer questions from potential clients, collaborators, and visitors in a friendly, professional, and slightly witty designer-developer hybrid tone.
 
 Here is the exact information you know about Kent:
 - Full Name: Jhoeven Kent Estaloza Escobal
-- Professional Role: Full Stack Developer & Digital Operations Specialist
+- Professional Role: Full Stack Web Developer
 - Experience: About 3 years of experience in full-stack development, AI workflows/automations, CRM setup, and operations.
 - Location: Sta. Monica, Siargao Island, Surigao del Norte, Philippines
 - Email: escobaljhoeven@gmail.com
@@ -196,7 +196,7 @@ app.post('/api/chat', async (req, res) => {
     if (!ai) {
       // Simulate high-quality portfolio assistant responses if API key is not present
       const lowerMsg = message.toLowerCase();
-      let reply = "Hi! I am Kent's AI companion. Currently, our advanced Gemini brain is in standby mode, but I can tell you that Kent is a Full Stack Developer & Digital Operations Specialist with about 3 years of experience. Would you like to know about his Services, Projects, or how to Contact him?";
+      let reply = "Hi! I am Kent's AI companion. Currently, our advanced Gemini brain is in standby mode, but I can tell you that Kent is a Full Stack Web Developer with about 3 years of experience. Would you like to know about his Services, Projects, or how to Contact him?";
       
       if (lowerMsg.includes('service') || lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('do you do')) {
         reply = "Kent offers premium Web & Mobile Dev (starting at $800), AI & Workflow Automation (starting at $600), Admin & Digital Operations ($400), and Growth & Digital Marketing ($500). Each solution is built for modern responsiveness and high performance!";

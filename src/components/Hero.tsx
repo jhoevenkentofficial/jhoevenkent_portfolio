@@ -130,7 +130,7 @@ export default function Hero({ setActiveSection }: HeroProps) {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-xl md:text-3xl lg:text-[2.2rem] font-bold font-sans text-[#1C2C54] tracking-tight leading-tight mb-5"
           >
-            Full Stack Developer & Digital Operations Specialist
+            Full Stack Web Developer
           </motion.h2>
           
           <motion.p 
