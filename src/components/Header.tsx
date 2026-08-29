@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const navItems = [
   { id: 'home', label: 'Home', href: '/' },
-  { id: 'services', label: 'Services', href: '/' },
+  { id: 'services', label: 'Skills', href: '/' },
   { id: 'work', label: 'Work', href: '/work' },
   { id: 'blog', label: 'Blog', href: '/', hasDropdown: true },
   { id: 'testimonials', label: 'Testimonials', href: '/' }
