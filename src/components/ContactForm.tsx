@@ -37,9 +37,9 @@ const initialState: FormState = {
 };
 
 const inputClass =
-  'w-full rounded-[10px] border border-[#0B1F33]/15 bg-white px-4 py-3 text-[15px] text-[#111827] placeholder:text-[#66717E]/60 transition-colors focus:border-[#174A7E] focus:outline-none';
+  'w-full rounded-[12px] border border-[#1B0638]/10 bg-[#F7F8FA] px-4 py-3.5 text-[14px] text-[#090B0D] placeholder:text-[#171A1F]/35 transition-all focus:border-[#20C52B]/70 focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#20C52B]/10';
 
-const labelClass = 'mb-2 block text-[13.5px] font-semibold text-[#0B1F33]';
+const labelClass = 'mb-2 block text-[12.5px] font-bold text-[#1B0638]';
 export const ContactForm = () => {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -91,19 +91,19 @@ export const ContactForm = () => {
 
   if (submitted) {
     return (
-      <div className="rounded-[14px] border border-[#174A7E]/25 bg-white p-8 text-center sm:p-10">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#174A7E]/10 text-[#174A7E]">
+      <div className="rounded-[18px] border border-[#20C52B]/20 bg-[#20C52B]/[0.04] p-8 text-center sm:p-10">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#20C52B]/10 text-[#20C52B]">
           <CheckCircle2 className="h-7 w-7" />
         </span>
-        <h3 className="mt-5 text-[22px] font-bold tracking-[-0.015em] text-[#0B1F33]">
+        <h3 className="mt-5 text-[22px] font-bold tracking-[-0.015em] text-[#1B0638]">
           Your brief is ready to send
         </h3>
-        <p className="mx-auto mt-3 max-w-md text-[15.5px] leading-[1.68] text-[#111827]/78">
+        <p className="mx-auto mt-3 max-w-md text-[15.5px] leading-[1.68] text-[#090B0D]/78">
           Your email client should have opened with the details pre-filled. If it didn&apos;t, reach
           me directly at{' '}
           <a
             href={`mailto:${profile.email}`}
-            className="font-semibold text-[#174A7E] underline decoration-[#D29A42] decoration-2 underline-offset-2"
+            className="font-semibold text-[#20C52B] underline decoration-[#20C52B] decoration-2 underline-offset-2"
           >
             {profile.email}
           </a>
@@ -128,16 +128,16 @@ return (
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-[14px] border border-[#0B1F33]/10 bg-white p-6 sm:p-8"
     >
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-5 gap-y-[18px] sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
-            Full name <span className="text-[#D29A42]">*</span>
+            Full name <span className="text-[#20C52B]">*</span>
           </label>
           <input
             id="name"
             type="text"
+            autoComplete="name"
             value={form.name}
             onChange={(e) => update('name', e.target.value)}
             className={inputClass}
@@ -149,11 +149,12 @@ return (
 
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email address <span className="text-[#D29A42]">*</span>
+            Email address <span className="text-[#20C52B]">*</span>
           </label>
           <input
             id="email"
             type="email"
+            autoComplete="email"
             value={form.email}
             onChange={(e) => update('email', e.target.value)}
             className={inputClass}
@@ -170,6 +171,7 @@ return (
           <input
             id="company"
             type="text"
+            autoComplete="organization"
             value={form.company}
             onChange={(e) => update('company', e.target.value)}
             className={inputClass}
@@ -198,7 +200,7 @@ return (
 
         <div className="sm:col-span-2">
           <label htmlFor="projectType" className={labelClass}>
-            Project type <span className="text-[#D29A42]">*</span>
+            Project type <span className="text-[#20C52B]">*</span>
           </label>
           <select
             id="projectType"
@@ -221,11 +223,11 @@ return (
 
         <div className="sm:col-span-2">
           <label htmlFor="message" className={labelClass}>
-            Project details <span className="text-[#D29A42]">*</span>
+            Project details <span className="text-[#20C52B]">*</span>
           </label>
           <textarea
             id="message"
-            rows={5}
+            rows={4}
             value={form.message}
             onChange={(e) => update('message', e.target.value)}
             className={`${inputClass} resize-y`}
@@ -236,12 +238,12 @@ return (
         </div>
       </div>
 
-      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-[13px] leading-[1.55] text-[#66717E]">
-          Fields marked <span className="text-[#D29A42]">*</span> are required. Typical reply time
+      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[11.5px] leading-[1.55] text-[#171A1F]/50">
+          Fields marked <span className="text-[#20C52B]">*</span> are required. Typical reply time
           is within 24 hours.
         </p>
-        <Button type="submit" variant="primary" size="md" className="shrink-0">
+        <Button type="submit" variant="secondary" size="md" className="min-h-12 shrink-0 px-6 shadow-[0_12px_24px_-14px_rgba(32,197,43,0.65)]">
           <Send className="h-4 w-4" />
           Send Project Brief
         </Button>

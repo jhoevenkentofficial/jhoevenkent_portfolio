@@ -25,16 +25,6 @@ export interface ServicePillar {
   capabilities: string[];
 }
 
-export interface Engagement {
-  id: string;
-  role: string;
-  company: string;
-  period: string;
-  location: string;
-  summary: string;
-  highlights: string[];
-}
-
 export interface Project {
   id: string;
   title: string;

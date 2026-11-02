@@ -41,7 +41,7 @@ export const selectedBuilds = [
     desc: 'AI-powered hiring ecosystem connecting talent and employers.',
     to: '/work',
     badge: 'H',
-    badgeBg: '#0F1F38',
+    badgeBg: '#1B0638',
   },
   {
     id: 'brightweb',
@@ -50,7 +50,7 @@ export const selectedBuilds = [
     desc: 'Websites, systems, apps and automation for businesses.',
     to: '/brightweb',
     badge: 'B',
-    badgeBg: '#1D64D8',
+    badgeBg: '#20C52B',
   },
   {
     id: 'ipsnsu',
@@ -59,7 +59,7 @@ export const selectedBuilds = [
     desc: 'Applicant portal with filing tracking and admin dashboard.',
     to: '/work',
     badge: 'IP',
-    badgeBg: '#159947',
+    badgeBg: '#171A1F',
   },
 ];
 

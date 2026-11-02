@@ -3,7 +3,7 @@ import type { Project } from '../types';
 export const projects: Project[] = [
   {
     id: 'hirenova',
-    title: 'HireNova',
+    title: 'Siargao HireHub / HireNova',
     category: 'Employment Technology / Professional Networking',
     period: 'September 2025 – Present',
     deployment: 'Production — Siargao Island, Philippines',
@@ -12,9 +12,10 @@ export const projects: Project[] = [
     tags: ['Node.js', 'Python', 'REST APIs', 'MySQL', 'Postgres', 'Ionic'],
     summaryPoints: [
       'Central web and mobile job application platform bridging local talent with expanding businesses across the Siargao Island tourism and hospitality ecosystems.',
-      'Implemented scalable backend solutions supporting concurrent user capacity while maintaining system reliability.',
+      'Implemented Node.js and Python backend services that supported 35% growth in concurrent-user capacity while maintaining uptime above 99.9%.',
+      'Connected REST APIs to secure MySQL and PostgreSQL infrastructure and designed clear application pathways for job seekers and employers.',
     ],
-    demoUrl: 'https://siargaohirehubnetworking.onrender.com/',
+    demoUrl: 'https://hirenova-cec8.onrender.com/',
     featured: true,
   },
   {

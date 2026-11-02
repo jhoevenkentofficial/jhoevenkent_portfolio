@@ -31,7 +31,7 @@ export const SectionHeading = ({
         {eyebrow && (
           <p
             className={`font-mono text-[12px] font-medium uppercase tracking-[0.16em] ${
-              light ? 'text-[#72B7E6]' : 'text-[#174A7E]'
+              light ? 'text-[#20C52B]' : 'text-[#20C52B]'
             }`}
           >
             {eyebrow}
@@ -39,7 +39,7 @@ export const SectionHeading = ({
         )}
         <h2
           className={`mt-3 text-[30px] font-bold leading-[1.14] tracking-[-0.02em] text-balance sm:text-[38px] lg:text-[42px] ${
-            light ? 'text-[#F6F2E9]' : 'text-[#0B1F33]'
+            light ? 'text-white' : 'text-[#1B0638]'
           }`}
         >
           {title}
@@ -47,7 +47,7 @@ export const SectionHeading = ({
         {description && (
           <p
             className={`mt-4 text-[16.5px] leading-[1.68] ${
-              light ? 'text-[#F6F2E9]/75' : 'text-[#111827]/80'
+              light ? 'text-white/75' : 'text-[#090B0D]/80'
             }`}
           >
             {description}

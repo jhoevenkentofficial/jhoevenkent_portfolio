@@ -22,16 +22,16 @@ interface ButtonProps {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-[#0F1F38] text-white border border-[#0F1F38] hover:bg-[#1a2f52] hover:border-[#1a2f52] hover:shadow-[0_10px_24px_-12px_rgba(15,31,56,0.5)]',
-  navy: 'bg-[#0F1F38] text-white border border-[#0F1F38] hover:bg-[#1a2f52] hover:border-[#1a2f52] hover:shadow-[0_10px_24px_-12px_rgba(15,31,56,0.5)]',
+    'bg-[#1B0638] text-white border border-[#1B0638] hover:bg-[#171A1F] hover:border-[#171A1F] hover:shadow-[0_10px_24px_-12px_rgba(23,26,31,0.5)]',
+  navy: 'bg-[#1B0638] text-white border border-[#1B0638] hover:bg-[#171A1F] hover:border-[#171A1F] hover:shadow-[0_10px_24px_-12px_rgba(23,26,31,0.5)]',
   white:
-    'bg-white text-[#0F1F38] border border-[#E2DFD6] hover:border-[#0F1F38]/30 hover:shadow-[0_10px_24px_-14px_rgba(15,31,56,0.35)]',
+    'bg-white text-[#1B0638] border border-[#1B0638]/10 hover:border-[#1B0638]/30 hover:shadow-[0_10px_24px_-14px_rgba(23,26,31,0.35)]',
   secondary:
-    'bg-[#1D64D8] text-white border border-[#1D64D8] hover:bg-[#174ea8] hover:border-[#174ea8]',
+    'bg-[#20C52B] text-white border border-[#20C52B] hover:bg-[#171A1F] hover:border-[#171A1F]',
   'outline-dark':
-    'bg-transparent text-[#0F1F38] border border-[#0F1F38]/25 hover:border-[#0F1F38] hover:bg-[#0F1F38] hover:text-white',
+    'bg-transparent text-[#1B0638] border border-[#1B0638]/25 hover:border-[#1B0638] hover:bg-[#1B0638] hover:text-white',
   'outline-light':
-    'bg-transparent text-[#F6F2E9] border border-[#F6F2E9]/35 hover:border-[#F6F2E9] hover:bg-[#F6F2E9] hover:text-[#0F1F38]',
+    'bg-transparent text-white border border-white/35 hover:border-white hover:bg-white hover:text-[#1B0638]',
 };
 
 const sizeClasses: Record<Size, string> = {

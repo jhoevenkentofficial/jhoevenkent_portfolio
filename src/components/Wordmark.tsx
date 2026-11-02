@@ -15,8 +15,8 @@ export const Wordmark = ({ light = false, className = '' }: WordmarkProps) => {
       <span
         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] font-mono text-[14px] font-medium transition-colors ${
           light
-            ? 'bg-[#F6F2E9] text-[#0B1F33] group-hover:bg-[#72B7E6]'
-            : 'bg-[#0B1F33] text-[#F6F2E9] group-hover:bg-[#174A7E]'
+            ? 'bg-white text-[#1B0638] group-hover:bg-[#20C52B]'
+            : 'bg-[#1B0638] text-white group-hover:bg-[#20C52B]'
         }`}
       >
         JKE
@@ -24,14 +24,14 @@ export const Wordmark = ({ light = false, className = '' }: WordmarkProps) => {
       <span className="flex flex-col leading-tight">
         <span
           className={`text-[15.5px] font-bold tracking-[-0.015em] ${
-            light ? 'text-[#F6F2E9]' : 'text-[#0B1F33]'
+            light ? 'text-white' : 'text-[#1B0638]'
           }`}
         >
           Jhoeven Kent Escobal
         </span>
         <span
           className={`font-mono text-[10.5px] uppercase tracking-[0.13em] ${
-            light ? 'text-[#72B7E6]' : 'text-[#174A7E]'
+            light ? 'text-[#20C52B]' : 'text-[#20C52B]'
           }`}
         >
           Full Stack Developer
