@@ -1,98 +1,113 @@
-import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { Container } from './Container';
-import { Button } from './Button';
-import { navLinks, profile } from '../data/profile';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { profile } from '../data/profile';
 
-const profilePortrait = new URL('../img/Professional Innovation Hub Portrait.png', import.meta.url).href;
+const links = [
+  { label: 'Services', id: 'services' },
+  { label: 'Our Work', id: 'work' },
+  { label: 'Testimonials', id: 'testimonials' },
+  { label: 'Meet Kent', id: 'about' },
+];
 
 export const Header = () => {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const { pathname, hash } = useLocation();
+  const isHome = pathname === '/';
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    setMenuOpen(false);
+  }, [pathname, hash]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!menuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    if (hash) setActiveSection(hash.slice(1));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+
+    for (const { id } of links) {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    }
+
+    return () => observer.disconnect();
+  }, [isHome, hash]);
+
+  const closeMenu = () => {
+    if (!menuOpen) return;
+    setMenuOpen(false);
+    requestAnimationFrame(() => menuButtonRef.current?.focus());
+  };
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-all duration-200 xl:hidden ${
-        scrolled
-          ? 'border-[#1B0638]/10 bg-[#F4F5F6]/95 backdrop-blur-md'
-          : 'border-transparent bg-[#F4F5F6]'
-      }`}
-    >
-      <Container className="flex h-[64px] items-center justify-between gap-4">
-        <NavLink to="/" className="flex items-center gap-2.5" aria-label="Jhoeven Kent Escobal — home">
-          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[#1B0638]/10 text-[10px] font-extrabold text-[#1B0638]">
-            <span aria-hidden="true">JKE</span>
-            <img
-              src={profilePortrait}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
+    <header className={`site-header${isHome ? ' site-header--home' : ''}`}>
+      <div className="site-header__inner">
+        <Link to="/#home" className="brand-mark" aria-label="Jhoeven Kent Escobal — home">
+          <span className="brand-mark__name">
+            <span>Jhoeven Kent</span>
+            <strong>Escobal</strong>
           </span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-[14.5px] font-bold tracking-[-0.01em] text-[#1B0638]">
-              Jhoeven Kent Escobal
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#20C52B]">
-              Full Stack Developer
-            </span>
-          </span>
-        </NavLink>
+        </Link>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-[10px] border border-[#1B0638]/15 text-[#1B0638] transition-colors hover:bg-[#1B0638]/[0.06]"
+          className="site-header__menu"
+          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {menuOpen ? <X /> : <Menu />}
         </button>
-      </Container>
 
-      {open && (
-        <div className="border-t border-[#1B0638]/10 bg-[#F4F5F6]">
-          <Container className="flex max-h-[70vh] flex-col gap-1 overflow-y-auto py-4">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.href}
-                to={link.href}
-                end={link.href === '/'}
-                className={({ isActive }) =>
-                  `rounded-[8px] px-3 py-3 text-[15px] font-semibold transition-colors ${
-                    isActive ? 'bg-[#20C52B]/10 text-[#1B0638]' : 'text-[#090B0D]/75'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <div className="mt-3 flex flex-col gap-3 pb-2">
-              <Button to="/contact" variant="primary" size="md" showArrow>
-                Start a Project
-              </Button>
-              <Button href={profile.resumeUrl} variant="outline-dark" size="md" external>
-                Download Résumé
-              </Button>
-            </div>
-          </Container>
-        </div>
-      )}
+        <nav id="primary-navigation" className={`site-nav${menuOpen ? ' site-nav--open' : ''}`} aria-label="Main navigation">
+          {links.map(({ label, id }) => (
+            <Link
+              key={id}
+              to={`/#${id}`}
+              onClick={closeMenu}
+              aria-current={activeSection === id ? 'location' : undefined}
+              className={activeSection === id ? 'site-nav__link is-active' : 'site-nav__link'}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <a href={profile.bookingUrl} className="site-nav__cta" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>
+          Start a Project <ArrowUpRight aria-hidden="true" />
+        </a>
+      </div>
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { lazy, Suspense, useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import {
   X,
@@ -10,8 +10,10 @@ import {
   LayoutGrid,
   Rotate3d,
 } from 'lucide-react';
-import { FunnelBarrel, SiteWorkItem } from './FunnelBarrel';
+import type { SiteWorkItem } from './FunnelBarrel';
 import { useBrowserPreview } from './BrowserPreviewContext';
+
+const FunnelBarrel = lazy(() => import('./FunnelBarrel').then((module) => ({ default: module.FunnelBarrel })));
 
 interface SiteWorks3DModalProps {
   open: boolean;
@@ -30,7 +32,11 @@ export const SiteWorks3DModal = ({
 }: SiteWorks3DModalProps) => {
   const { openPreview } = useBrowserPreview();
   const [selectedItem, setSelectedItem] = useState<SiteWorkItem | null>(null);
-  const [viewMode, setViewMode] = useState<'3d' | 'grid'>('3d');
+  const [viewMode, setViewMode] = useState<'3d' | 'grid'>(() =>
+    window.matchMedia('(max-width: 700px), (prefers-reduced-motion: reduce)').matches
+      ? 'grid'
+      : '3d',
+  );
   const spinRef = useRef<((delta: number) => void) | null>(null);
 
   useEffect(() => {
@@ -65,7 +71,7 @@ export const SiteWorks3DModal = ({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex flex-col justify-between overflow-hidden animate-fadeIn"
+      className="siteworks-modal fixed inset-0 z-[100] flex flex-col justify-between overflow-hidden animate-fadeIn"
       style={{
         backgroundColor: 'rgba(9, 13, 26, 0.88)',
         backdropFilter: 'blur(16px)',
@@ -78,7 +84,7 @@ export const SiteWorks3DModal = ({
         className="relative z-20 flex w-full flex-col px-6 pt-6 sm:px-10 sm:pt-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between">
+        <div className="siteworks-modal__header-row flex items-start justify-between">
           <div>
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#20C52B]">
               Projects · Client Site Works
@@ -93,28 +99,34 @@ export const SiteWorks3DModal = ({
 
           <div className="flex items-center gap-2.5">
             {/* View Mode Toggle: 3D Cylinder / Grid */}
-            <div className="hidden sm:flex items-center rounded-full border border-white/15 bg-white/5 p-1 text-white">
+            <div className="flex items-center rounded-full border border-white/15 bg-white/5 p-1 text-white">
               <button
                 type="button"
                 onClick={() => setViewMode('3d')}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-bold transition-all ${
+                aria-label="Show 3D cylinder showcase"
+                className={`flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1 text-[12px] font-bold transition-all ${
                   viewMode === '3d'
                     ? 'bg-[#20C52B] text-white shadow-xs'
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                <Rotate3d className="h-3.5 w-3.5" /> 3D Cylinder
+                <Rotate3d className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">3D Cylinder</span>
+                <span className="sm:hidden">3D</span>
               </button>
               <button
                 type="button"
                 onClick={() => setViewMode('grid')}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-bold transition-all ${
+                aria-label="Show project grid"
+                className={`flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1 text-[12px] font-bold transition-all ${
                   viewMode === 'grid'
                     ? 'bg-[#20C52B] text-white shadow-xs'
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                <LayoutGrid className="h-3.5 w-3.5" /> Grid
+                <LayoutGrid className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Grid</span>
+                <span className="sm:hidden">Grid</span>
               </button>
             </div>
 
@@ -139,11 +151,13 @@ export const SiteWorks3DModal = ({
       >
         {viewMode === '3d' ? (
           <div className="relative h-full w-full">
-            <FunnelBarrel
-              items={items}
-              onOpen={(item) => setSelectedItem(item)}
-              spinRef={spinRef}
-            />
+            <Suspense fallback={<div className="flex h-full items-center justify-center text-sm text-white/60">Loading 3D showcase…</div>}>
+              <FunnelBarrel
+                items={items}
+                onOpen={(item) => setSelectedItem(item)}
+                spinRef={spinRef}
+              />
+            </Suspense>
 
             {/* Quick manual rotate arrows for easy interaction */}
             <div className="pointer-events-none absolute inset-x-4 top-1/2 flex -translate-y-1/2 items-center justify-between sm:inset-x-8">

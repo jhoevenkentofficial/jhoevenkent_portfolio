@@ -36,16 +36,19 @@ export const FunnelBarrel = ({ items, onOpen, spinRef }: FunnelBarrelProps) => {
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const compactScreen = window.matchMedia('(max-width: 767px)').matches;
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: !compactScreen, alpha: true });
     } catch (e) {
       console.warn('WebGL init failed:', e);
       wrap.dataset.failed = 'true';
       return;
     }
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const getPixelRatio = () =>
+      Math.min(window.devicePixelRatio, compactScreen ? 1.25 : window.innerWidth <= 1024 ? 1.5 : 2);
+    renderer.setPixelRatio(getPixelRatio());
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     const scene = new THREE.Scene();
@@ -291,7 +294,7 @@ export const FunnelBarrel = ({ items, onOpen, spinRef }: FunnelBarrelProps) => {
       const w = wrap.clientWidth || window.innerWidth;
       const h = wrap.clientHeight || Math.round(window.innerHeight * 0.62);
       if (w <= 0 || h <= 0) return;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(getPixelRatio());
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
@@ -304,12 +307,14 @@ export const FunnelBarrel = ({ items, onOpen, spinRef }: FunnelBarrelProps) => {
     const resizeTimer = setTimeout(resize, 60);
 
     let raf = 0;
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
-    function animate() {
+    function animate(timestamp: number) {
       raf = requestAnimationFrame(animate);
       if (document.hidden) return;
-      const dt = Math.min(clock.getDelta(), 0.05);
+      timer.update(timestamp);
+      const dt = Math.min(timer.getDelta(), 0.05);
 
       // Horizontal: idle spin + parallax + drag
       const idleSpeed = reduce ? 0 : pointerInside ? 0.04 : 0.16;
@@ -402,6 +407,7 @@ export const FunnelBarrel = ({ items, onOpen, spinRef }: FunnelBarrelProps) => {
       mats.forEach((m) => m.dispose());
       texCache.forEach((t) => t.dispose());
       renderer.dispose();
+      timer.dispose();
       if (spinRef) spinRef.current = null;
     };
   }, [items, spinRef]);

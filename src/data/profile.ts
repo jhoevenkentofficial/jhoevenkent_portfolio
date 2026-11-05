@@ -1,4 +1,4 @@
-import type { ContactDetail, NavLink, Stat, TimelineEntry } from '../types';
+import type { Stat, TimelineEntry } from '../types';
 
 export const profile = {
   name: 'Jhoeven Kent Estaloza Escobal',
@@ -14,6 +14,7 @@ export const profile = {
   phoneHref: '+639096028169',
   location: 'Sta. Monica, Siargao Island, Philippines',
   availability: 'Available for selected projects',
+  bookingUrl: 'https://calendly.com/escobaljhoeven/new-meeting',
   resumeUrl: '/Jhoeven_Kent_Escobal_Master_Resume.pdf',
   social: {
     github: 'https://github.com/jhoevenkentofficial',
@@ -21,38 +22,6 @@ export const profile = {
     facebook: 'https://www.facebook.com/kent.escobal.12',
   },
 } as const;
-
-export const navLinks: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/work' },
-  { label: 'BrightWeb', href: '/brightweb' },
-  { label: 'Services', href: '/expertise' },
-  { label: 'Tech Stack', href: '/tech-stack' },
-  { label: 'Credentials', href: '/credentials' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-];
-
-export const contactDetails: ContactDetail[] = [
-  {
-    label: 'Email',
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-    icon: 'mail',
-  },
-  {
-    label: 'Phone',
-    value: profile.phone,
-    href: `tel:${profile.phoneHref}`,
-    icon: 'phone',
-  },
-  {
-    label: 'Location',
-    value: profile.location,
-    href: 'https://maps.google.com/?q=Siargao+Island+Surigao+del+Norte',
-    icon: 'location',
-  },
-];
 
 export const stats: Stat[] = [
   {

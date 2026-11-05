@@ -3,99 +3,17 @@ import {
   ArrowUpRight,
   MousePointerClick,
 } from 'lucide-react';
-import { ProjectWalkthroughModal, BentoProjectItem, GalleryItem } from './ProjectWalkthroughModal';
+import { ProjectWalkthroughModal } from './ProjectWalkthroughModal';
+import type { BentoProjectItem } from './ProjectWalkthroughModal';
 import { ComingSoonModal } from './ComingSoonModal';
 import { SiteWorks3DModal } from './SiteWorks3DModal';
+import { useBrowserPreview } from './BrowserPreviewContext';
+import { siteWorksGallery } from '../data/siteWorksGallery';
 
 const brightwebIcon = new URL('../img/brightweb icon.png', import.meta.url).href;
 const hirenovaIcon = new URL('../img/hirenova icon.png', import.meta.url).href;
 
-const grahamMoreheadImg = new URL('../img/Site Works/Grahammorehead.jfif', import.meta.url).href;
-const heatherStratfordImg = new URL('../img/Site Works/HeatherStratford.jfif', import.meta.url).href;
-const hirenovaImg = new URL('../img/Site Works/Hirenova.jfif', import.meta.url).href;
-const kuyaPasbuyImg = new URL('../img/Site Works/KuyaPasbuy.jfif', import.meta.url).href;
-const pysciCareImg = new URL('../img/Site Works/PysciCare.jfif', import.meta.url).href;
-const secretbeachImg = new URL('../img/Site Works/secretbeach.jfif', import.meta.url).href;
-const travelTewnewsImg = new URL('../img/Site Works/TravelTewnews.jfif', import.meta.url).href;
-const vainImg = new URL('../img/Site Works/Vain.jfif', import.meta.url).href;
-const vanillyImg = new URL('../img/Site Works/Vanilly.jfif', import.meta.url).href;
-
-const siteWorksGallery: GalleryItem[] = [
-  {
-    id: 'grahammorehead',
-    title: 'Graham Morehead',
-    category: 'Consulting & AI Portfolio',
-    description: 'Personal brand funnel and thought leadership platform for AI researcher & author.',
-    image: grahamMoreheadImg,
-    url: 'https://grahammorehead.com/',
-  },
-  {
-    id: 'heatherstratford',
-    title: 'Heather Stratford',
-    category: 'Cybersecurity & Keynote',
-    description: 'Executive speaking booking funnel and keynote leadership platform.',
-    image: heatherStratfordImg,
-    url: 'https://heatherstratford.com/',
-  },
-  {
-    id: 'hirenova',
-    title: 'Siargao HireHub / HireNova',
-    category: 'Recruitment & Job Platform',
-    description: 'Employment technology platform connecting talent and island businesses with applicant tracking.',
-    image: hirenovaImg,
-    url: 'https://hirenova-cec8.onrender.com/',
-  },
-  {
-    id: 'kuyapasbuy',
-    title: 'Kuya Pasabuy Delivery',
-    category: 'Commerce & Logistics',
-    description: 'Island delivery platform with dynamic customer ordering and rider fulfillment routing.',
-    image: kuyaPasbuyImg,
-    url: 'https://www.kuyapasabuysiargao.com/',
-  },
-  {
-    id: 'pyscicare',
-    title: 'Physio-Care',
-    category: 'Healthcare & Clinic Platform',
-    description: 'Physical therapy clinic platform with patient appointment intake and treatment services.',
-    image: pysciCareImg,
-    url: 'https://physio-care-one.vercel.app/',
-  },
-  {
-    id: 'secretbeach',
-    title: 'Secret Beach Siargao',
-    category: 'Hospitality & Luxury Resort',
-    description: 'Direct guest booking funnel and luxury island resort accommodation showcase.',
-    image: secretbeachImg,
-    url: 'https://secretbeachsiargao.com/',
-  },
-  {
-    id: 'traveltewnews',
-    title: 'TravelTewNews',
-    category: 'Media & News Aggregator',
-    description: 'Multi-channel travel news indexing engine and cloud-distributed publication.',
-    image: travelTewnewsImg,
-    url: 'https://traveltewnews.com/',
-  },
-  {
-    id: 'vain',
-    title: 'Vain',
-    category: 'Fashion & E-Commerce',
-    description: 'Lifestyle apparel brand store with streamlined cart checkout and responsive gallery.',
-    image: vainImg,
-    url: 'https://vain.com/',
-  },
-  {
-    id: 'vanilly',
-    title: 'Vanilly Australia',
-    category: 'E-Commerce · Australia',
-    description: 'Direct-to-consumer Australian vanilla products e-commerce store with Stripe checkout.',
-    image: vanillyImg,
-    url: 'https://www.vanilly.com.au/',
-  },
-];
-
-const bentoItems: Record<string, BentoProjectItem> = {
+export const bentoItems: Record<string, BentoProjectItem> = {
   automations: {
     id: 'automations',
     category: 'Services: AI & Automations',
@@ -313,22 +231,65 @@ const bentoItems: Record<string, BentoProjectItem> = {
 };
 
 export const ProjectsBentoGrid = () => {
+  const { openPreview } = useBrowserPreview();
   const [selectedItem, setSelectedItem] = useState<BentoProjectItem | null>(null);
   const [showComingSoon, setShowComingSoon] = useState(false);
   const [showSiteWorks3D, setShowSiteWorks3D] = useState(false);
+  const caseStudies: Record<string, BentoProjectItem> = {
+    hirenova: bentoItems.hirenovaPortal,
+    kuyapasbuy: bentoItems.kuyaPasabuy,
+    traveltewnews: bentoItems.travelTewNews,
+  };
 
   return (
     <div className="relative w-full">
+      <section className="work-gallery" aria-label="Selected live projects">
+        <div className="work-gallery__heading">
+          <p className="editorial-kicker">Selected live work · 09 projects</p>
+          <p>Real products, client sites and digital experiences, built to be explored.</p>
+        </div>
+        <div className="work-gallery__grid">
+          {siteWorksGallery.map((site, index) => (
+            <article className={`work-gallery__item work-gallery__item--${index + 1}`} key={site.id}>
+              <button
+                type="button"
+                className="work-gallery__image"
+                onClick={() => site.url && openPreview(site.url, site.title)}
+                aria-label={`Open ${site.title} live preview`}
+              >
+                <img src={site.image} alt={`${site.title} project screenshot`} loading="lazy" />
+                <span>Open live preview <ArrowUpRight aria-hidden="true" /></span>
+              </button>
+              <div className="work-gallery__meta"><span>{site.category}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
+              <h3>{site.title}</h3>
+              {site.description && <p>{site.description}</p>}
+              <div className="work-gallery__actions">
+                {site.url && (
+                  <button type="button" onClick={() => openPreview(site.url!, site.title)}>
+                    View project <ArrowUpRight aria-hidden="true" />
+                  </button>
+                )}
+                {caseStudies[site.id] && (
+                  <button type="button" onClick={() => setSelectedItem(caseStudies[site.id])}>
+                    Case study <ArrowUpRight aria-hidden="true" />
+                  </button>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Eyebrow & Headline Header - Same sizes as Home Page */}
       <div className="mb-6 sm:mb-8">
         <p className="font-mono text-[12px] font-bold uppercase tracking-[0.16em] text-[#20C52B]">
-          PROJECTS & SERVICES
+          INTERACTIVE WALKTHROUGHS
         </p>
-        <h1 className="mt-3 text-[37px] font-extrabold leading-[1.04] tracking-[-0.045em] text-[#1B0638] sm:text-[49px] xl:text-[58px]">
-          Real apps, funnels and GHL builds you can open.
-        </h1>
+        <h2 className="mt-3 text-[37px] font-extrabold leading-[1.04] tracking-[-0.045em] text-[#1B0638] sm:text-[49px] xl:text-[58px]">
+          Go beyond the screenshots.
+        </h2>
         <p className="mt-4 max-w-[820px] text-[15px] font-medium leading-relaxed tracking-[0.005em] text-[#171A1F]/75 sm:text-[17px]">
-          Everything here shipped. Open a card to walk through the work, startup systems, and automation services at full size.
+          Open a project to explore its walkthrough, system details and interactive live-site showcase.
         </p>
       </div>
 
@@ -349,9 +310,11 @@ export const ProjectsBentoGrid = () => {
         <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-12">
           
           {/* Card 1: Automations */}
-          <div
+          <button
+            type="button"
+            aria-label="Open AI and workflow automations case study"
             onClick={() => setSelectedItem(bentoItems.automations)}
-            className="dashboard-card group relative flex cursor-pointer flex-col justify-between overflow-hidden p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg xl:col-span-5"
+            className="dashboard-card group relative flex w-full cursor-pointer flex-col justify-between overflow-hidden p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg sm:p-6 xl:col-span-5"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -459,7 +422,7 @@ export const ProjectsBentoGrid = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </button>
 
           {/* Card 2: Startup & Company Websites */}
           <div className="dashboard-card relative flex flex-col overflow-hidden p-5 sm:p-6 xl:col-span-4">
@@ -535,9 +498,11 @@ export const ProjectsBentoGrid = () => {
             {/* The 2 choices with BIG squircle logo placed FIRST before text and green circle arrow */}
             <div className="mt-4 flex flex-col gap-3">
               {/* Choice 1: BrightWeb IT Solutions */}
-              <div
-                onClick={() => window.open('https://www.brightwebsolution.site/', '_blank', 'noopener,noreferrer')}
-                className="group/item cursor-pointer rounded-[18px] sm:rounded-[20px] border border-[#1B0638]/10 bg-white p-3 sm:p-3.5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/50 hover:shadow-md"
+              <a
+                href="https://www.brightwebsolution.site/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/item cursor-pointer rounded-[18px] sm:rounded-[20px] border border-[#1B0638]/10 bg-white p-3 text-left no-underline shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/50 hover:shadow-md sm:p-3.5"
               >
                 <div className="flex items-center gap-3 sm:gap-3.5">
                   {/* Big Squircle Icon First */}
@@ -554,10 +519,10 @@ export const ProjectsBentoGrid = () => {
                     <span className="block font-mono text-[9px] sm:text-[9.5px] font-bold uppercase tracking-wider text-blue-600">
                       STARTUP & IT SOLUTIONS STUDIO
                     </span>
-                    <h3 className="mt-0.5 truncate text-[14.5px] sm:text-[15.5px] font-bold text-[#1B0638] group-hover/item:text-[#20C52B] transition-colors">
+                    <h3 className="mt-0.5 line-clamp-2 text-[14.5px] sm:text-[15.5px] font-bold text-[#1B0638] group-hover/item:text-[#20C52B] transition-colors">
                       BrightWeb IT Solutions
                     </h3>
-                    <p className="mt-0.5 truncate text-[11.5px] sm:text-[12px] text-[#171A1F]/65">
+                    <p className="mt-0.5 line-clamp-2 text-[11.5px] sm:text-[12px] text-[#171A1F]/65">
                       Full-stack websites, custom systems & cloud infrastructure...
                     </p>
                   </div>
@@ -567,12 +532,14 @@ export const ProjectsBentoGrid = () => {
                     <ArrowUpRight className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                   </div>
                 </div>
-              </div>
+              </a>
 
               {/* Choice 2: Siargao HireHub / HireNova */}
-              <div
-                onClick={() => window.open('https://hirenova-cec8.onrender.com/', '_blank', 'noopener,noreferrer')}
-                className="group/item cursor-pointer rounded-[18px] sm:rounded-[20px] border border-[#1B0638]/10 bg-white p-3 sm:p-3.5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/50 hover:shadow-md"
+              <a
+                href="https://hirenova-cec8.onrender.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/item cursor-pointer rounded-[18px] sm:rounded-[20px] border border-[#1B0638]/10 bg-white p-3 text-left no-underline shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/50 hover:shadow-md sm:p-3.5"
               >
                 <div className="flex items-center gap-3 sm:gap-3.5">
                   {/* Big Squircle Icon First */}
@@ -589,10 +556,10 @@ export const ProjectsBentoGrid = () => {
                     <span className="block font-mono text-[9px] sm:text-[9.5px] font-bold uppercase tracking-wider text-emerald-700">
                       AI EMPLOYMENT & HIRING PLATFORM
                     </span>
-                    <h3 className="mt-0.5 truncate text-[14.5px] sm:text-[15.5px] font-bold text-[#1B0638] group-hover/item:text-[#20C52B] transition-colors">
+                    <h3 className="mt-0.5 line-clamp-2 text-[14.5px] sm:text-[15.5px] font-bold text-[#1B0638] group-hover/item:text-[#20C52B] transition-colors">
                       Siargao HireHub / HireNova
                     </h3>
-                    <p className="mt-0.5 truncate text-[11.5px] sm:text-[12px] text-[#171A1F]/65">
+                    <p className="mt-0.5 line-clamp-2 text-[11.5px] sm:text-[12px] text-[#171A1F]/65">
                       Recruitment platform & candidate portal connecting talent...
                     </p>
                   </div>
@@ -602,7 +569,7 @@ export const ProjectsBentoGrid = () => {
                     <ArrowUpRight className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -610,9 +577,11 @@ export const ProjectsBentoGrid = () => {
           <div className="flex flex-col gap-3 xl:col-span-3">
             
             {/* Stacked Card 1: Physio-Care */}
-            <div
-              onClick={() => window.open('https://physio-care-one.vercel.app/', '_blank', 'noopener,noreferrer')}
-              className="dashboard-card group flex cursor-pointer items-center justify-between p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/40 hover:shadow-md"
+            <a
+              href="https://physio-care-one.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dashboard-card group flex cursor-pointer items-center justify-between p-4 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/40 hover:shadow-md"
             >
               <div className="min-w-0 pr-2">
                 <span className="block font-mono text-[9px] font-bold uppercase tracking-wider text-blue-600">
@@ -628,12 +597,14 @@ export const ProjectsBentoGrid = () => {
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#1B0638]/10 bg-[#F4F5F6] text-[#171A1F]/70 group-hover:bg-[#20C52B] group-hover:text-white transition-colors">
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </div>
-            </div>
+            </a>
 
             {/* Stacked Card 2: TravelTewNews Platform */}
-            <div
-              onClick={() => window.open('https://traveltewnews.com/', '_blank', 'noopener,noreferrer')}
-              className="dashboard-card group flex cursor-pointer items-center justify-between p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/40 hover:shadow-md"
+            <a
+              href="https://traveltewnews.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dashboard-card group flex cursor-pointer items-center justify-between p-4 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/40 hover:shadow-md"
             >
               <div className="min-w-0 pr-2">
                 <span className="block font-mono text-[9px] font-bold uppercase tracking-wider text-amber-600">
@@ -649,12 +620,14 @@ export const ProjectsBentoGrid = () => {
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#1B0638]/10 bg-[#F4F5F6] text-[#171A1F]/70 group-hover:bg-[#20C52B] group-hover:text-white transition-colors">
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </div>
-            </div>
+            </a>
 
             {/* Stacked Card 3: Vanilly */}
-            <div
-              onClick={() => window.open('https://www.vanilly.com.au/', '_blank', 'noopener,noreferrer')}
-              className="dashboard-card group flex cursor-pointer items-center justify-between p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/40 hover:shadow-md"
+            <a
+              href="https://www.vanilly.com.au/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dashboard-card group flex cursor-pointer items-center justify-between p-4 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-[#20C52B]/40 hover:shadow-md"
             >
               <div className="min-w-0 pr-2">
                 <span className="block font-mono text-[9px] font-bold uppercase tracking-wider text-amber-700">
@@ -670,7 +643,7 @@ export const ProjectsBentoGrid = () => {
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#1B0638]/10 bg-[#F4F5F6] text-[#171A1F]/70 group-hover:bg-[#20C52B] group-hover:text-white transition-colors">
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </div>
-            </div>
+            </a>
 
           </div>
         </div>
@@ -679,9 +652,11 @@ export const ProjectsBentoGrid = () => {
         <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-12">
           
           {/* Card 4: Funnels and sites */}
-          <div
+          <button
+            type="button"
+            aria-label="Open interactive 3D project showcase"
             onClick={() => setShowSiteWorks3D(true)}
-            className="dashboard-card group relative flex cursor-pointer flex-col justify-between overflow-hidden p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg xl:col-span-4"
+            className="dashboard-card group relative flex w-full cursor-pointer flex-col justify-between overflow-hidden p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg sm:p-6 xl:col-span-4"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -762,12 +737,14 @@ export const ProjectsBentoGrid = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </button>
 
           {/* Card 5: AI agents and RAG chatbots */}
-          <div
+          <button
+            type="button"
+            aria-label="Open AI agents and RAG chatbots case study"
             onClick={() => setSelectedItem(bentoItems.aiAgents)}
-            className="dashboard-card group relative flex cursor-pointer flex-col justify-between overflow-hidden p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg xl:col-span-4"
+            className="dashboard-card group relative flex w-full cursor-pointer flex-col justify-between overflow-hidden p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg sm:p-6 xl:col-span-4"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -868,12 +845,14 @@ export const ProjectsBentoGrid = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </button>
 
           {/* Card 6: Mobile Apps & Web Systems */}
-          <div
+          <button
+            type="button"
+            aria-label="View mobile apps and web systems information"
             onClick={() => setShowComingSoon(true)}
-            className="dashboard-card group relative flex cursor-pointer flex-col justify-between overflow-hidden p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg xl:col-span-4"
+            className="dashboard-card group relative flex w-full cursor-pointer flex-col justify-between overflow-hidden p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#20C52B]/40 hover:shadow-lg sm:p-6 xl:col-span-4"
           >
             <div>
               {/* Tech Stack Icon Badges */}
@@ -956,7 +935,7 @@ export const ProjectsBentoGrid = () => {
                 <div className="mt-1 h-8 w-full rounded bg-purple-50" />
               </div>
             </div>
-          </div>
+          </button>
 
         </div>
 

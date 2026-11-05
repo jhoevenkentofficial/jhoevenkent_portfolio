@@ -8,6 +8,7 @@ interface SectionHeadingProps {
   className?: string;
   light?: boolean;
   align?: 'left' | 'center';
+  id?: string;
 }
 
 export const SectionHeading = ({
@@ -18,6 +19,7 @@ export const SectionHeading = ({
   className = '',
   light = false,
   align = 'left',
+  id,
 }: SectionHeadingProps) => {
   const isCentered = align === 'center';
 
@@ -38,6 +40,7 @@ export const SectionHeading = ({
           </p>
         )}
         <h2
+          id={id}
           className={`mt-3 text-[30px] font-bold leading-[1.14] tracking-[-0.02em] text-balance sm:text-[38px] lg:text-[42px] ${
             light ? 'text-white' : 'text-[#1B0638]'
           }`}

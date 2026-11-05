@@ -1,20 +1,13 @@
-import { SEOHead } from '../components/SEOHead';
-import { Container } from '../components/Container';
-import { TechnologyItem } from '../components/TechnologyItem';
-import { techCategories } from '../data/technologies';
-import { SectionHeading } from '../components/SectionHeading';
+import { Container } from '../Container';
+import { TechnologyItem } from '../TechnologyItem';
+import { techCategories } from '../../data/technologies';
+import { SectionHeading } from '../SectionHeading';
 
-export const TechStackPage = () => {
+export const SkillsSection = () => {
   return (
-    <>
-      <SEOHead
-        title="Tech Stack | Jhoeven Kent Escobal"
-        description="Technologies I work with - frontend, backend, database, tools, and automation."
-        canonicalPath="/tech-stack"
-      />
-      <section className="py-10 sm:py-12">
+      <section id="skills" className="tech-stack-page py-10 sm:py-12" aria-labelledby="skills-title">
         <Container>
-          <SectionHeading eyebrow="Tech Stack" title="Technologies I Work With" />
+          <SectionHeading eyebrow="Technical expertise" title="Technologies I Work With" id="skills-title" />
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {techCategories.slice(0, 6).map((group) => (
               <div key={group.id} className="card-premium min-w-0 p-6">
@@ -51,6 +44,5 @@ export const TechStackPage = () => {
           </div>
         </Container>
       </section>
-    </>
   );
 };

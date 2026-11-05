@@ -1,43 +1,39 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ScrollManager } from './components/ScrollManager';
 import { BrowserPreviewProvider } from './components/BrowserPreviewContext';
-import { HomePage } from './pages/HomePage';
-import { ExpertisePage } from './pages/ExpertisePage';
-import { WorkPage } from './pages/WorkPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { BrightWebPage } from './pages/BrightWebPage';
-import { TechStackPage } from './pages/TechStackPage';
-import { CredentialsPage } from './pages/CredentialsPage';
-import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
+import { Sidebar } from './components/Sidebar';
 import { Footer } from './components/Footer';
+
+const HomePage = lazy(() => import('./pages/HomePage').then((module) => ({ default: module.HomePage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
 
 export default function App() {
   return (
     <BrowserRouter>
       <BrowserPreviewProvider>
         <ScrollManager />
-        <div className="min-h-screen bg-[#F4F5F6] text-[#090B0D]">
+        <div className="min-h-screen bg-[#F5F4F0] text-[#10100F]">
+          <Header />
           <Sidebar />
-          <div className="flex min-h-screen min-w-0 flex-col xl:pl-[310px]">
-            <Header />
-            <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
+          <main id="main-content" className="min-h-[70vh] focus:outline-none" tabIndex={-1}>
+            <Suspense fallback={<div className="route-loading" role="status">Loading page…</div>}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/expertise" element={<ExpertisePage />} />
-                <Route path="/work" element={<WorkPage />} />
-                <Route path="/brightweb" element={<BrightWebPage />} />
-                <Route path="/tech-stack" element={<TechStackPage />} />
-                <Route path="/credentials" element={<CredentialsPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/about" element={<Navigate to="/#about" replace />} />
+                <Route path="/work" element={<Navigate to="/#work" replace />} />
+                <Route path="/brightweb" element={<Navigate to="/#work" replace />} />
+                <Route path="/expertise" element={<Navigate to="/#services" replace />} />
+                <Route path="/services" element={<Navigate to="/#services" replace />} />
+                <Route path="/tech-stack" element={<Navigate to="/#services" replace />} />
+                <Route path="/credentials" element={<Navigate to="/#about" replace />} />
+                <Route path="/contact" element={<Navigate to="/" replace />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
-            </main>
-            <Footer />
-          </div>
+            </Suspense>
+          </main>
+          <Footer />
         </div>
       </BrowserPreviewProvider>
     </BrowserRouter>

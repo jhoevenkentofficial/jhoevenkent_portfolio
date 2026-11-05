@@ -31,7 +31,7 @@ export interface TechCategory {
   technologies: Technology[];
 }
 
-// Single source of truth — shared by Home strip + Tech Stack page.
+// Single source of truth for the portfolio's technical skills section.
 export const techCategories: TechCategory[] = [
   {
     id: 'languages',

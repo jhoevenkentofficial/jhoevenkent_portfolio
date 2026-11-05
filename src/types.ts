@@ -1,15 +1,3 @@
-export interface NavLink {
-  label: string;
-  href: string;
-}
-
-export interface ContactDetail {
-  label: string;
-  value: string;
-  href: string;
-  icon: 'mail' | 'phone' | 'location';
-}
-
 export interface Stat {
   id: string;
   value: string;
@@ -36,12 +24,6 @@ export interface Project {
   summaryPoints: string[];
   demoUrl?: string;
   featured?: boolean;
-}
-
-export interface StackGroup {
-  id: string;
-  category: string;
-  items: string[];
 }
 
 export interface Testimonial {
