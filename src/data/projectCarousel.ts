@@ -1,6 +1,8 @@
 import { projects } from './work';
 import { siteWorksGallery } from './siteWorksGallery';
 
+const brightwebImage = new URL('../img/Site Works/brightweb.png', import.meta.url).href;
+
 export interface ProjectCarouselItem {
   id: string;
   title: string;
@@ -66,7 +68,7 @@ export const projectCarouselItems: ProjectCarouselItem[] = [
     category: 'Web & Business Solutions',
     description:
       'Professional websites, custom business systems, web applications, and automation solutions for growing businesses.',
-    image: 'https://www.brightwebsolution.site/og.png',
+    image: brightwebImage,
     url: 'https://www.brightwebsolution.site/',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Cloud Hosting'],
     caseStudyId: 'companyWebsites',

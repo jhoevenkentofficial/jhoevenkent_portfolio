@@ -204,7 +204,6 @@ export const bentoItems: Record<string, BentoProjectItem> = {
       'Strict guardrails and prompt engineering preventing hallucinations or unauthorized data leaks.',
     ],
     tags: ['OpenAI', 'Python', 'LangChain', 'pgvector', 'RAG Chatbots', 'Customer AI'],
-    demoUrl: 'https://yourgiftnetwork.app/',
   },
 
   appsExtensions: {
